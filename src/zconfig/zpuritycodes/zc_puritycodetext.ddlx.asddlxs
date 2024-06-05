@@ -1,0 +1,41 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'PurityCodeText', 
+    typeNamePlural: 'PurityCodeTexts', 
+    title: {
+      type: #STANDARD, 
+      label: 'Purity Codes Text', 
+      value: 'Langu'
+    }
+  }
+}
+annotate view ZC_PurityCodeText with
+{
+  @UI.facet: [ {
+    id: 'ZI_PurityCodeText', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'Purity Codes Text', 
+    position: 1 
+  } ]
+  @UI.identification: [ {
+    position: 1 , 
+    label: 'Langu'
+  } ]
+  @UI.lineItem: [ {
+    position: 1 , 
+    label: 'Langu'
+  } ]
+  Langu;
+  
+  @UI.identification: [ {
+    position: 2 , 
+    label: 'Description'
+  } ]
+  @UI.lineItem: [ {
+    position: 2 , 
+    label: 'Description'
+  } ]
+  Description;
+}

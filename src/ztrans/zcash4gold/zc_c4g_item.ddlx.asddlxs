@@ -1,0 +1,95 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Item',
+                typeNamePlural: 'Items',
+                title: { type: #STANDARD,  value: 'ItemNumber' },
+                imageUrl: 'Attachment' }  }
+
+@UI.presentationVariant: [
+  {
+    sortOrder: [
+      {
+        by: 'ItemNumber',
+        direction: #ASC
+      }
+    ],
+    visualizations: [
+      {
+        type: #AS_LINEITEM
+      }
+    ],
+    qualifier: 'DefaultItemsPresentationVariant'
+  }
+]
+
+@UI.selectionPresentationVariant: [
+  {
+    presentationVariantQualifier: 'DefaultItemsPresentationVariant'
+  }
+]
+
+annotate entity ZC_C4G_Item with
+{
+
+  @UI.facet: [ { id:            'Item',
+                  purpose:       #STANDARD,
+                  type:          #IDENTIFICATION_REFERENCE,
+                  label:         'Item',
+                  position:      10 },
+
+                  { id: 'Upload',
+                    purpose: #STANDARD,
+                    type: #FIELDGROUP_REFERENCE,
+                    label: 'Upload Item Photo',
+                    position: 20,
+                    targetQualifier: 'Upload'
+                  } ]
+
+  @UI.hidden: true
+  ItemUuid;
+
+  @UI.hidden: true
+  HeaderUuid;
+
+  @UI: { lineItem:       [ { position: 10} ],
+        identification: [ { position: 10 } ]  }
+  ItemNumber;
+
+  @UI: { fieldGroup: [ { position: 10, qualifier: 'Upload' , label: 'Attachment'} ]}
+  @UI.lineItem: [{ position: 15, importance: #HIGH  }]
+  Attachment;
+
+  @UI.hidden: true
+  MimeType;
+
+  @UI.hidden: true
+  Filename;
+
+  @UI: { lineItem:       [ { position: 20, label: 'Item Description' } ],
+        identification: [ { position: 20 } ] }
+  ItemName;
+
+
+
+  @UI: { lineItem:       [ { position: 30 } ],
+        identification: [ { position: 30 } ] }
+  @UI.textArrangement: #TEXT_LAST
+  ItemPurityCode;
+
+  @UI: { lineItem:       [ { position: 30 } ],
+        identification: [ { position: 30 } ] }
+  CashDecrease;
+
+  @UI: { lineItem:       [ { position: 40, label: 'Item Weight' } ],
+        identification: [ { position: 40 } ] }
+  ItemWeight;
+
+  @UI: { lineItem:       [ { position: 50, label: 'Item Cash' } ],
+           identification: [ { position: 50 } ] }
+  ItemCash;
+
+  @UI: { identification: [ { position: 60 } ] }
+  LocalLastChangedAt;
+
+}

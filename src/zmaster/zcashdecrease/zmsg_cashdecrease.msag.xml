@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_MSAG" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <T100A>
+    <ARBGB>ZMSG_CASHDECREASE</ARBGB>
+    <MASTERLANG>E</MASTERLANG>
+    <STEXT>Messages for zcx_cashdecrease</STEXT>
+   </T100A>
+   <T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_CASHDECREASE</ARBGB>
+     <MSGNR>001</MSGNR>
+     <TEXT>Cash Decrease Percentage Required.</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_CASHDECREASE</ARBGB>
+     <MSGNR>002</MSGNR>
+     <TEXT>Invalid Cash Decrease Percentage &apos;&amp;1&apos; it should be between 0 - 100 (%)</TEXT>
+    </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZMSG_CASHDECREASE</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Invalid Gold Purity Code &apos;&amp;1&apos;</TEXT>
+    </T100>
+   </T100>
+  </asx:values>
+ </asx:abap>
+</abapGit>

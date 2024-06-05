@@ -1,0 +1,114 @@
+managed implementation in class zbp_i_c4g_header unique;
+strict ( 2 );
+
+with draft;
+
+define behavior for ZI_C4G_Header alias Header
+persistent table zc4g_header
+draft table zc4g_header_d
+lock master
+total etag LastChangedAt
+etag master LocalLastChangedAt
+authorization master ( instance )
+{
+  create;
+  update;
+  delete;
+
+  association _Items { create; with draft; }
+
+  field ( numbering : managed, readonly ) HeaderUuid;
+  field ( readonly ) HeaderStatus, StoreNumber, GoldPriceByDate, HeaderTotalCash, HeaderId;
+  field ( readonly ) LastChangedAt, LastChangedBy, CreatedAt, CreatedBy, LocalLastChangedAt;
+  field ( mandatory ) HeaderCurrencyCode, HeaderUom, SellerFullname;
+
+  action ( features : instance ) approve result [1] $self;
+  action ( features : instance ) reject result [1] $self;
+  internal action recalcTotalPrice;
+
+  determination setInitialStatus on modify { create; }
+  determination setStoreNumber on modify { create; }
+  determination setTodayGoldPrice on modify { create; field HeaderCurrencyCode , HeaderUom; }
+  determination calculateHeaderID on save { create; }
+
+  validation validateCurrencyCode on save { create; field HeaderCurrencyCode; }
+  validation validateUom on save { create; field HeaderUom; }
+  validation validateEmail on save { create; field SellerEmail; }
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare
+  {
+    validation validateCurrencyCode;
+    validation validateUom;
+    validation validateEmail;
+    validation Item~validateItemWeight;
+  }
+
+  mapping for ZC4G_HEADER
+  {
+    CreatedAt = created_at;
+    CreatedBy = created_by;
+    GoldPriceByDate = gold_price_by_date;
+    HeaderCurrencyCode = header_currency_code;
+    HeaderId = header_id;
+    HeaderNote = header_note;
+    HeaderStatus = header_status;
+    HeaderTotalCash = header_total_cash;
+    HeaderUom = header_uom;
+    HeaderUuid = header_uuid;
+    LastChangedAt = last_changed_at;
+    LastChangedBy = last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    SellerEmail = seller_email;
+    SellerFullname = seller_fullname;
+    StoreNumber = store_number;
+  }
+
+}
+
+define behavior for ZI_C4G_Item alias Item
+persistent table zc4g_item
+draft table zc4g_itm_d
+lock dependent by _Header
+etag master LocalLastChangedAt
+authorization dependent by _Header
+{
+  update;
+  delete;
+
+  association _Header { with draft; }
+
+  field ( numbering : managed, readonly ) ItemUuid;
+  field ( readonly ) CreatedBy, LastChangedBy, LocalLastChangedAt;
+  field ( readonly ) HeaderUuid, ItemNumber, CashDecrease, CashDecreaseUom, ItemCash, ItemCurrencyCode, ItemUom;
+  field ( mandatory ) ItemName, ItemPurityCode, ItemWeight;
+
+  determination setItemUom on modify { create; update; }
+  determination setCashDecrease on modify { create; field ItemPurityCode; }
+  determination calculateItemCash on modify { create; field ItemWeight, ItemPurityCode; }
+  determination calculateItemNumber on modify { create; }
+
+  validation validateItemWeight on save { create; field ItemWeight; }
+
+  mapping for ZC4G_ITEM
+  {
+    CashDecrease = cash_decrease;
+    CashDecreaseUom = cash_decrease_uom;
+    CreatedBy = created_by;
+    HeaderUuid = header_uuid;
+    ItemCash = item_cash;
+    ItemCurrencyCode = item_currency_code;
+    ItemName = item_name;
+    ItemNumber = item_number;
+    ItemPurityCode = item_purity_code;
+    ItemUom = item_uom;
+    ItemUuid = item_uuid;
+    ItemWeight = item_weight;
+    LastChangedBy = last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+
+}

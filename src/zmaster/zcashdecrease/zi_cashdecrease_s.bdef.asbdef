@@ -1,0 +1,68 @@
+managed implementation in class zbp_i_cashdecrease_s unique;
+strict ( 2 );
+
+with draft;
+
+define behavior for ZI_CashDecrease_S alias CashDecreaseSingleton
+with unmanaged save
+//persistent table not needed this is a sigleton Entity
+draft table zcashdecre_d_s
+lock master
+total etag LastChangedAtMax
+//etag master not needed this is a sigleton Entity
+authorization master ( global )
+
+{
+  association _CashDecrease { create; with draft; }
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare
+  {
+    validation CashDecrease~validatePurityCode;
+    validation CashDecrease~validateCashDecrease;
+  }
+
+}
+
+define behavior for ZI_CashDecrease alias CashDecrease
+persistent table zcashdecrease
+draft table zcashdecrease_d
+lock dependent by _Singleton
+etag master LocalLastChangedAt
+authorization dependent by _Singleton
+{
+  update;
+  delete;
+
+  field ( readonly ) SingletonID;
+  field ( readonly ) LocalCreatedBy, LocalCreatedAt, LocalLastChangedBy, LocalLastChangedAt, LastChangedAt;
+  field ( mandatory : create, readonly : update ) StoreNumber, PurityCode;
+  // field ( readonly ) DecreaseUom;
+
+  association _Singleton { with draft; }
+
+  // validate entered purity code
+  validation validatePurityCode on save { create; field PurityCode; }
+
+  // validate the percentage entered when new or edit an instance.
+  validation validateCashDecrease on save { create; field CashDecrease; }
+
+  // (%) uom will be defaulted when new instance is created.
+  determination defaultUomToPercentage on modify { create; }
+
+  mapping for ZCASHDECREASE
+  {
+    StoreNumber = store_number;
+    PurityCode = purity_code;
+    CashDecrease = cash_decrease;
+    DecreaseUom = decrease_uom;
+    LocalCreatedBy = local_created_by;
+    LocalCreatedAt = local_created_at;
+    LocalLastChangedBy = local_last_changed_by;
+    LocalLastChangedAt = local_last_changed_at;
+    LastChangedAt = last_changed_at;
+  }
+}

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<abapGit version="v1.0.0" serializer="LCL_OBJECT_SKTD" serializer_version="v1.0.0">
+ <asx:abap xmlns:asx="http://www.sap.com/abapxml" version="1.0">
+  <asx:values>
+   <KTD_OBJECT>
+    <NAME>ZPURITYCODES</NAME>
+    <TYPE>GENERAL_TEXT</TYPE>
+    <SOURCE_CONTENT_TYPE>02</SOURCE_CONTENT_TYPE>
+    <REF_OBJ_TYPE>SMBC</REF_OBJ_TYPE>
+    <REF_OBJ_NAME>ZPURITYCODES</REF_OBJ_NAME>
+    <ABAP_LANGUAGE_VERSION>X</ABAP_LANGUAGE_VERSION>
+    <CONTENT>
+     <item>
+      <NAME>ZPURITYCODES</NAME>
+      <LANGU>E</LANGU>
+      <COMPONENT_UUID>PghK8y2rHu2PvALXdktYjA==</COMPONENT_UUID>
+      <SOURCE_CONTENT>VGhpcyBpcyBhIGxpc3Qgb2YgZ29sZCBwdXJpdHkgY29kZXMuCgpUaGUgZmlyc3QgZGlnaXQgZGVm
+aW5lIHRoZSBnb2xkIGthcmF0LCBleGFtcGxlOgoqIDl4eCA6IDI0IGthcmF0IGdvbGQuCgpUaGUg
+Mm5kIGFuZCAzcmQgZGlnaXRzIGRlZmluZSB0aGUgcHVyaXR5IHBlcmNlbnRhZ2UsIGV4YW1wbGU6
+CiogOTkwIDogOTAlIHB1cmUgZ29sZC4=</SOURCE_CONTENT>
+     </item>
+    </CONTENT>
+   </KTD_OBJECT>
+  </asx:values>
+ </asx:abap>
+</abapGit>

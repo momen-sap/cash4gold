@@ -1,0 +1,10 @@
+@EndUserText.label: 'Access control for ZI_C4G_HEADER'
+@MappingRole: true
+define role ZI_C4G_HEADER {
+    grant 
+        select
+            on
+                ZI_C4G_HEADER
+                    where (HeaderStatus) = aspect pfcg_auth(ZAOC4G, ZAFC4G, ACTVT = '03');
+                        
+}

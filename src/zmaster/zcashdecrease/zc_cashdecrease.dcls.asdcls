@@ -1,0 +1,6 @@
+@EndUserText.label: 'Access control for ZC_CASHDECREASE'
+@MappingRole: true
+define role ZC_CASHDECREASE {
+    grant select on ZC_CASHDECREASE 
+    where inheriting conditions from entity ZI_CashDecrease;
+}

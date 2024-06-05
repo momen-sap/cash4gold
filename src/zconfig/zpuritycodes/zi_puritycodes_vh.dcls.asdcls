@@ -1,0 +1,6 @@
+@EndUserText.label: 'Access control for ZI_PURITYCODES_VH'
+@MappingRole: true
+define role ZI_PURITYCODES_VH {
+    grant select on ZI_PurityCodes_VH
+    where INHERITING CONDITIONS FROM ENTITY ZI_PurityCode;
+}

@@ -1,0 +1,40 @@
+projection implementation in class ZBP_C_PURITYCODEALL_S unique;
+strict;
+use draft;
+
+define behavior for ZC_PurityCodeALL_S alias PurityCodeALL
+
+{
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+  use action SelectCustomizingTransptReq;
+
+  use association _PurityCode { create ( augment ); with draft; }
+}
+
+define behavior for ZC_PurityCode alias PurityCode
+
+{
+  field ( modify )
+   Description;
+
+
+  use update( augment );
+  use delete;
+
+  use association _PurityCodeALL { with draft; }
+  use association _PurityCodeText { create; with draft; }
+}
+
+define behavior for ZC_PurityCodeText alias PurityCodeText
+
+{
+  use update;
+  use delete;
+
+  use association _PurityCodeALL { with draft; }
+  use association _PurityCode { with draft; }
+}

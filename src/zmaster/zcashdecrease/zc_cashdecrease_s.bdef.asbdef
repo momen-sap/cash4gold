@@ -1,0 +1,25 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZC_CASHDECREASE_S alias CashDecreaseSingleton
+{
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _CashDecrease { create; with draft; }
+  field ( suppress ) lastchangedatmax;
+}
+
+define behavior for ZC_CASHDECREASE alias CashDecrease
+{
+  use update;
+  use delete;
+
+  use association _Singleton { with draft; }
+  //field ( suppress ) lastchangedat;
+}

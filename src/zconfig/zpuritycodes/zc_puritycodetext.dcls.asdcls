@@ -1,0 +1,5 @@
+@MappingRole: true
+define role ZC_PurityCodeText {
+  grant select on ZC_PurityCodeText
+  where INHERITING CONDITIONS FROM ENTITY ZI_PurityCodeText;
+}

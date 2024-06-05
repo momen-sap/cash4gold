@@ -1,0 +1,5 @@
+@EndUserText.label: 'Access control for ZI_CASHDECREASE'
+@MappingRole: true
+define role ZI_CASHDECREASE {
+    grant select on ZI_CashDecrease where ( ) = aspect pfcg_auth('S_TABU_NAM', ACTVT = '03', TABLE = 'ZI_CASHDECREASE');
+}

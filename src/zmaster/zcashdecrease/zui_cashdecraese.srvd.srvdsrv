@@ -1,0 +1,5 @@
+@EndUserText.label: 'Cash Decrease - Maintain'
+define service ZUI_CASHDECRAESE {
+  expose ZC_CASHDECREASE_S as CashDecreaseSingleton;
+  expose ZC_CASHDECREASE as CashDecrease;
+}

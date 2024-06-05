@@ -1,0 +1,5 @@
+define service ZUI_PURITYCODES {
+  expose ZC_PURITYCODEALL_S as PurityCodeALL;
+  expose ZC_PURITYCODE as PurityCode;
+  expose ZC_PURITYCODETEXT as PurityCodeText;
+}

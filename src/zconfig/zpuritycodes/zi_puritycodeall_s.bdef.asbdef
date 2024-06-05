@@ -1,0 +1,94 @@
+managed with additional save implementation in class ZBP_I_PURITYCODEALL_S unique;
+strict;
+with draft;
+
+define behavior for ZI_PurityCodeALL_S alias PurityCodeALL
+draft table ZPURITYCODES_D_S
+with unmanaged save
+lock master total etag LastChangedAtMax
+authorization master( global )
+
+{
+  update;
+  internal create;
+  internal delete;
+
+  draft action ( features : instance ) Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+  action ( features : instance ) SelectCustomizingTransptReq parameter D_SelectCustomizingTransptReqP result [1] $self;
+
+  association _PurityCode { create ( features : instance ); with draft; }
+}
+
+define behavior for ZI_PurityCode alias PurityCode
+persistent table ZPURITYCODES
+draft table ZPURITYCODES_D
+etag master LocalLastChangedAt
+lock dependent by _PurityCodeALL
+authorization dependent by _PurityCodeALL
+
+{
+  field ( mandatory : create )
+   Puritycode;
+
+  field ( readonly )
+   SingletonID;
+
+  field ( readonly : update )
+   Puritycode;
+
+
+  update( features : global );
+  delete( features : global );
+
+  mapping for ZPURITYCODES
+  {
+    Puritycode = PURITYCODE;
+    LastChangedAt = LAST_CHANGED_AT;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+  association _PurityCodeALL { with draft; }
+  association _PurityCodeText { create ( features : global ); with draft; }
+
+  validation ValidateRecordChanges on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}
+
+define behavior for ZI_PurityCodeText alias PurityCodeText
+persistent table ZPURITYCODESTXT
+draft table ZPURITYCODETXT_D
+etag master LocalLastChangedAt
+lock dependent by _PurityCodeALL
+authorization dependent by _PurityCodeALL
+
+{
+  field ( mandatory : create )
+   Langu;
+
+  field ( readonly )
+   SingletonID,
+   Puritycode;
+
+  field ( readonly : update )
+   Langu;
+
+
+  update( features : global );
+  delete( features : global );
+
+  mapping for ZPURITYCODESTXT
+  {
+    Langu = LANGU;
+    Puritycode = PURITYCODE;
+    Description = DESCRIPTION;
+    LocalLastChangedAt = LOCAL_LAST_CHANGED_AT;
+  }
+
+  association _PurityCodeALL { with draft; }
+  association _PurityCode { with draft; }
+
+  validation ValidateRecordChanges on save ##NOT_ASSIGNED_TO_DETACT { create; update; delete; }
+}

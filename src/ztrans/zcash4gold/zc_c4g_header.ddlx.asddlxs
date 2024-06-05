@@ -1,0 +1,108 @@
+@Metadata.layer: #CORE
+
+@UI: {
+  headerInfo: { typeName: 'Transaction',
+                typeNamePlural: 'Transactions',
+                title: { type: #STANDARD, label: 'Transaction Header', value: 'HeaderId' } } }
+                
+
+ @UI.presentationVariant: [
+  {
+    text: 'Default',
+    sortOrder: [
+      {
+        by: 'HeaderId',
+        direction: #DESC
+      }
+    ],
+    visualizations: [
+      {
+        type: #AS_LINEITEM
+      }
+    ],
+    qualifier: 'DefaultPresentationVariant'
+  }
+]
+
+@UI.selectionPresentationVariant: [
+  {
+    text: 'Headers',
+    presentationVariantQualifier: 'DefaultPresentationVariant'
+  }
+]
+
+annotate entity ZC_C4G_HEADER with
+{
+
+
+  @UI.facet: [ { id:              'Header',
+                   purpose:         #STANDARD,
+                   type:            #IDENTIFICATION_REFERENCE,
+                   label:           'Transaction Header',
+                   position:        10 },
+
+                 { id:              'Items',
+                   purpose:         #STANDARD,
+                   type:            #LINEITEM_REFERENCE,
+                   label:           'Items',
+                   position:        20,
+                   targetElement:   '_Items'} ]
+
+  @UI.hidden: true
+  HeaderUuid;
+
+  @UI: {  lineItem:       [ { position: 10 } ],
+        identification: [ { position: 10 } ],
+        selectionField: [ { position: 10 } ] }
+  HeaderId;
+
+  @UI: {  lineItem:       [ { position: 20 } ],
+       identification: [ { position: 20 } ],
+       selectionField: [ { position: 20 } ] }
+  StoreNumber;
+
+  @UI: {
+        identification: [ { position: 30 } ]}
+  HeaderUom;
+
+  @UI: {
+       identification: [ { position: 40 } ] }
+  HeaderCurrencyCode;
+
+
+  @UI: {  lineItem:       [ { position: 60, label: 'Seller Fullname' } ],
+       identification: [ { position: 60 } ],
+       selectionField: [ { position: 30 } ] }
+  SellerFullname;
+
+  @UI: {  lineItem:       [ { position: 70, label: 'Seller Email' } ],
+        identification: [ { position: 70 } ],
+        selectionField: [ { position: 40 } ] }
+  SellerEmail;
+
+  @UI: {  lineItem:       [ { position: 80, label: 'Total Cash' } ],
+        identification: [ { position: 80 } ] }
+  HeaderTotalCash;
+
+  @UI: {
+      identification: [ { position: 85 } ] }
+  GoldPriceByDate;
+
+  @UI: {  identification: [ { position: 90 } ] }
+  HeaderNote;
+
+  @UI: {  lineItem:  [ { position: 90 },
+                       { type: #FOR_ACTION, dataAction: 'approve', label: 'Approve' },
+                       { type: #FOR_ACTION, dataAction: 'reject', label: 'Reject' } ],
+       identification: [ { position: 100 },
+                         { type: #FOR_ACTION, dataAction: 'approve', label: 'Approve' },
+                         { type: #FOR_ACTION, dataAction: 'reject', label: 'Reject' } ] }
+  HeaderStatus;
+
+  @UI: {  identification: [ { position: 110 } ] }
+  LastChangedBy;
+
+  @UI: {  identification: [ { position: 120 } ] }
+  LocalLastChangedAt;
+
+}

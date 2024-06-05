@@ -1,0 +1,11 @@
+@EndUserText.label: 'Access control for ZC_C4G_HEADER'
+@MappingRole: true
+define role ZC_C4G_HEADER {
+    grant
+        select
+            on
+                ZC_C4G_HEADER
+                    where
+                        inheriting conditions from entity ZI_C4G_HEADER;
+                        
+}

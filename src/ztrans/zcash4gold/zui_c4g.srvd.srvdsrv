@@ -1,0 +1,5 @@
+@EndUserText.label: 'Serv defenition Cash for Gold'
+define service ZUI_C4G {
+  expose ZC_C4G_HEADER;
+  expose ZC_C4G_Item;
+}

@@ -1,0 +1,47 @@
+@Metadata.layer: #CUSTOMER
+@UI: {
+  headerInfo: {
+    typeName: 'PurityCode', 
+    typeNamePlural: 'PurityCodes', 
+    title: {
+      type: #STANDARD, 
+      label: 'Purity Code', 
+      value: 'Puritycode'
+    }
+  }
+}
+annotate view ZC_PurityCode with
+{
+  @UI.identification: [ {
+    position: 1 
+  } ]
+  @UI.lineItem: [ {
+    position: 1 
+  } ]
+  @UI.facet: [ {
+    id: 'ZI_PurityCode', 
+    purpose: #STANDARD, 
+    type: #IDENTIFICATION_REFERENCE, 
+    label: 'Purity Code', 
+    position: 1 
+  }, 
+  {
+    id: 'ZI_PurityCodeText', 
+    type: #LINEITEM_REFERENCE, 
+    label: 'Purity Codes Text', 
+    position: 2 , 
+    targetElement: '_PurityCodeText'
+  } ]
+  Puritycode;
+  
+  @UI.identification: [ {
+    hidden: true, 
+    position: 2 , 
+    label: 'Description'
+  } ]
+  @UI.lineItem: [ {
+    position: 2 , 
+    label: 'Description'
+  } ]
+  Description;
+}

@@ -1,0 +1,36 @@
+@Metadata.layer: #CORE
+
+@UI: { headerInfo: { typeName:       'Cash Decrease',
+                     typeNamePlural: 'Cash Decrease Entries',
+                     title:          { type: #STANDARD,
+                                       label: 'Cash Decrease - Maintain'
+                                       } } }
+
+annotate entity ZC_CASHDECREASE with
+{
+
+  @UI.facet: [{ type: #IDENTIFICATION_REFERENCE }]
+
+  @UI.lineItem: [{ position: 10 }]
+  @UI.identification: [{ position: 10 }]
+  StoreNumber;
+
+  @UI.lineItem: [{ position: 20 }]
+  @UI.identification: [{ position: 20 }]
+  @UI.textArrangement: #TEXT_LAST
+  PurityCode;
+
+  @UI.lineItem: [{ position: 30 }]
+  @UI.identification: [{ position: 30 }]
+  CashDecrease;
+
+  @UI.lineItem: [{ position: 50 }]
+  @UI.identification: [{ position: 50 }]
+  @UI.textArrangement: #TEXT_FIRST
+  LocalLastChangedBy;
+
+  @UI.lineItem: [{ position: 60 }]
+  @UI.identification: [{ position: 60 }]
+  LocalLastChangedAt;
+
+}
